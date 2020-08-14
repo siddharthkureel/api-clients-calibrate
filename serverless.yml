@@ -1,0 +1,103 @@
+service: api-clients-calibrate
+
+# Create an optimized package for our functions
+package:
+  individually: true
+
+plugins:
+  - serverless-bundle # Package our functions with Webpack
+  - serverless-offline
+  - serverless-dotenv-plugin # Load .env as environment variables
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: ap-southeast-2
+
+  # These environment variables are made available to our functions
+  # under process.env.
+  environment:
+    tableName: clients
+
+  # 'iamRoleStatements' defines the permission policy for the Lambda function.
+  # In this case Lambda functions are granted with permissions to access DynamoDB.
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: arn:aws:dynamodb:ap-southeast-2:178799547101:table/clients
+
+functions:
+  # Defines an HTTP API endpoint that calls the main function in create.js
+  # - path: url path is /notes
+  # - method: POST request
+  # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
+  #     domain api call
+  # - authorizer: authenticate using the AWS IAM role
+  create:
+    handler: actions/create.main
+    events:
+      - http:
+          path: create
+          method: post
+          cors: true
+          authorizer: aws_iam
+  add:
+    handler: actions/add.main
+    events:
+      - http:
+          path: clients
+          method: post
+          cors: true
+          authorizer: aws_iam
+  get:
+    handler: actions/get.main
+    events:
+      - http:
+          path: clients/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+  list:
+    handler: actions/list.main
+    events:
+      - http:
+          path: clients
+          method: get
+          cors: true
+          authorizer: aws_iam
+  update:
+    handler: actions/update.main
+    events:
+      - http:
+          path: clients/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
+  patch:
+    handler: actions/patch.main
+    events:
+      - http:
+          path: clients/patch/{id}
+          method: patch
+          cors: true
+          authorizer: aws_iam
+  delete:
+    handler: actions/delete.main
+    events:
+      - http:
+          path: clients/{id}
+          method: delete
+          cors: true
+          authorizer: aws_iam
+# Create our resources with separate CloudFormation templates
+resources:
+  # API Gateway Errors
+  - ${file(resources/api-gateway-errors.yml)}

@@ -1,0 +1,11 @@
+{
+    "body": "{\"name\":\"accountCreated\",\"value\":\"true\"}",  
+    "pathParameters": {
+        "id": "13c25e90-ca93-11ea-94ed-2d287665c8bf"
+    },
+    "requestContext": {
+        "identity": {
+            "cognitoIdentityId": "ap-southeast-2:8b8ec622-ac34-474d-9ccd-4f9ab5de8a16"
+        }
+    }
+}

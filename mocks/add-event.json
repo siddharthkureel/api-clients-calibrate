@@ -1,0 +1,8 @@
+{  
+    "body": "{\"name\":\"sidkureel\",\"email\":\"siddharthkureel@outlook.com\",\"age\":\"30\",\"gender\":\"male\",\"height\":\"175\",\"weight\":\"76\",\"goal\":\"fitness\",\"payment\":\"done\",\"phone\":\"3984187809\"}",  
+    "requestContext": {    
+        "identity": {      
+            "cognitoIdentityId": "cd6ea2ef-2d07-4974-b531-4c98fe1eecbd"    
+        }
+    } 
+}

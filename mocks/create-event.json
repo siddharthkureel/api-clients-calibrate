@@ -1,0 +1,8 @@
+{  
+    "body": "{\"name\":\"sidkureel\",\"email\":\"admin@outlook.com\",\"password\":\"P@ssw0rd\", \"partnerId\":\"8b8ec622-ac34-474d-9ccd-4f9ab5de8a16\"}",
+    "requestContext": {    
+        "identity": {      
+            "cognitoIdentityId": "USER-SUB-12345"    
+        }
+    } 
+}
